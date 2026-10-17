@@ -1,0 +1,1544 @@
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&display=swap");
+
+/* ==========================================
+   LIFEPLAY — DESIGN SYSTEM
+   ========================================== */
+
+:root {
+  font-family: "DM Sans", -apple-system, BlinkMacSystemFont,
+    "Segoe UI", sans-serif;
+
+  color: #17191f;
+  background: #ffffff;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+
+  --ink: #17191f;
+  --muted: #777d89;
+  --secondary: #535b69;
+
+  --blue: #3478f6;
+  --blue-dark: #2463d5;
+  --blue-soft: #edf4ff;
+
+  /* Keep old variable names compatible */
+  --purple: var(--blue);
+  --purple-dark: var(--blue-dark);
+  --purple-soft: var(--blue-soft);
+
+  --surface: #f6f7f9;
+  --surface-hover: #eef1f5;
+  --line: #edf0f3;
+
+  --radius-sm: 12px;
+  --radius-md: 16px;
+  --radius-lg: 22px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  min-width: 320px;
+  min-height: 100%;
+  margin: 0;
+}
+
+body {
+  min-height: 100vh;
+  background: #ffffff;
+  color: var(--ink);
+}
+
+button {
+  font: inherit;
+}
+
+button:focus-visible {
+  outline: 3px solid rgba(52, 120, 246, 0.3);
+  outline-offset: 3px;
+}
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+/* ==========================================
+   ROLE SELECTION
+   ========================================== */
+
+.role-screen {
+  display: flex;
+  width: min(100% - 40px, 510px);
+  min-height: 100svh;
+  flex-direction: column;
+  margin: 0 auto;
+
+  padding:
+    max(25px, env(safe-area-inset-top))
+    0
+    max(28px, env(safe-area-inset-bottom));
+}
+
+.app-wordmark {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+
+  font-size: 0.82rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+}
+
+.app-wordmark svg {
+  color: var(--blue);
+}
+
+.role-choice {
+  width: 100%;
+  margin: auto 0;
+  padding: 48px 0;
+}
+
+.role-kicker {
+  margin: 0 0 16px;
+
+  color: var(--blue);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+}
+
+.role-choice h1 {
+  margin: 0;
+
+  font-size: clamp(2.7rem, 11vw, 4rem);
+  font-weight: 800;
+  letter-spacing: -0.065em;
+  line-height: 1.06;
+}
+
+.role-choice h1 span {
+  color: var(--blue);
+}
+
+.role-subtitle {
+  margin: 18px 0 32px;
+
+  color: var(--muted);
+  font-size: 1rem;
+  line-height: 1.65;
+}
+
+.role-options {
+  display: grid;
+  gap: 12px;
+}
+
+.role-option {
+  display: flex;
+  min-height: 82px;
+  align-items: center;
+  gap: 15px;
+
+  padding: 15px 17px;
+
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+
+  background: #ffffff;
+  color: var(--ink);
+
+  text-align: left;
+  cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.role-option:hover:not(:disabled) {
+  background: var(--surface);
+  border-color: #dce4ee;
+  transform: translateY(-1px);
+}
+
+.role-option > svg {
+  margin-left: auto;
+  color: var(--muted);
+}
+
+.role-option__icon {
+  display: grid;
+
+  width: 46px;
+  height: 46px;
+  flex: 0 0 auto;
+
+  place-items: center;
+
+  border-radius: 15px;
+  background: var(--blue-soft);
+  color: var(--blue);
+}
+
+.role-option__icon--instructor {
+  background: #f0f2f5;
+  color: #555e6d;
+}
+
+.role-option__copy {
+  display: grid;
+  gap: 4px;
+}
+
+.role-option__copy strong {
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.role-option__copy small {
+  color: var(--muted);
+  font-size: 0.79rem;
+  line-height: 1.4;
+}
+
+/* ==========================================
+   LOADING AND ERRORS
+   ========================================== */
+
+.loading-screen {
+  display: grid;
+
+  width: min(100% - 36px, 520px);
+  min-height: 100svh;
+  margin: 0 auto;
+
+  place-items: center;
+
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+
+.role-error,
+.simple-error,
+.instructor-error,
+.inline-error {
+  color: #c3404b;
+  font-size: 0.85rem;
+  line-height: 1.55;
+}
+
+/* ==========================================
+   SHARED GAME SCREEN
+   ========================================== */
+
+.learner-screen,
+.instructor-screen {
+  display: flex;
+
+  width: min(100% - 40px, 520px);
+  min-height: 100svh;
+
+  flex-direction: column;
+  margin: 0 auto;
+
+  padding:
+    max(12px, env(safe-area-inset-top))
+    0
+    max(16px, env(safe-area-inset-bottom));
+}
+
+/* ==========================================
+   TOP NAVIGATION
+   ========================================== */
+
+.simple-topbar,
+.instructor-topbar {
+  display: grid;
+
+  min-height: 62px;
+
+  grid-template-columns: 42px 1fr auto;
+  align-items: center;
+  gap: 12px;
+
+  border-bottom: 1px solid var(--line);
+}
+
+.simple-back,
+.instructor-back {
+  display: grid;
+
+  width: 40px;
+  height: 40px;
+
+  place-items: center;
+
+  border: 0;
+  border-radius: 50%;
+
+  background: var(--surface);
+  color: var(--ink);
+
+  cursor: pointer;
+
+  transition: background 0.2s ease;
+}
+
+.simple-back:hover,
+.instructor-back:hover {
+  background: var(--surface-hover);
+}
+
+.simple-topbar h1,
+.instructor-topbar h1 {
+  overflow: hidden;
+  margin: 0;
+
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: -0.035em;
+
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.simple-step,
+.instructor-step {
+  color: var(--muted);
+  font-size: 0.76rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+/* ==========================================
+   MAIN CONTENT
+   ========================================== */
+
+.learner-current,
+.instructor-current {
+  width: 100%;
+
+  margin: auto 0;
+  padding: 48px 4px 55px;
+
+  animation: content-appear 0.3s ease both;
+}
+
+@keyframes content-appear {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ==========================================
+   LEARNER — LEVEL AND BUDGET
+   ========================================== */
+
+.learner-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+
+  margin-bottom: 34px;
+
+  color: var(--muted);
+
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+
+.learner-budget {
+  padding: 8px 13px;
+
+  border-radius: 999px;
+
+  background: var(--blue-soft);
+  color: var(--blue-dark);
+
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0;
+}
+
+/* ==========================================
+   OBJECTIVE — MAIN FOCUS
+   ========================================== */
+
+.learner-objective-main,
+.instructor-objective {
+  width: 100%;
+}
+
+.learner-overline,
+.instructor-overline {
+  display: inline-block;
+
+  margin-bottom: 15px;
+
+  color: var(--blue);
+
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.09em;
+
+  text-transform: uppercase;
+}
+
+.learner-current h2,
+.instructor-current h2 {
+  max-width: 100%;
+  margin: 0;
+
+  color: var(--ink);
+
+  font-size: clamp(1.55rem, 3.5vw, 2rem);
+  font-weight: 700;
+
+  letter-spacing: -0.055em;
+  line-height: 1.3;
+
+  overflow-wrap: anywhere;
+}
+
+/* ==========================================
+   LEARNER — CONTEXT AND GUIDANCE
+   ========================================== */
+
+.learner-context,
+.learner-task,
+.instructor-instruction {
+  max-width: 470px;
+
+  margin: 20px 0 0;
+
+  color: var(--secondary);
+
+  font-size: 0.96rem;
+  font-weight: 400;
+  line-height: 1.7;
+}
+
+.learner-context {
+  margin-top: 22px;
+}
+
+.learner-task {
+  margin-top: 26px;
+}
+
+/* ==========================================
+   SHARED SECTION LABELS
+   ========================================== */
+
+.learner-section-label {
+  display: block;
+
+  color: var(--muted);
+
+  font-size: 0.71rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+
+  text-transform: uppercase;
+}
+
+/* ==========================================
+   LEARNER — NECESSARY INFORMATION
+   ========================================== */
+
+.learner-known {
+  display: grid;
+  gap: 12px;
+
+  margin-top: 30px;
+  padding: 18px;
+
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+
+  background: var(--surface);
+}
+
+.learner-info-list {
+  display: grid;
+  gap: 9px;
+}
+
+.learner-known p {
+  margin: 0;
+
+  color: var(--ink);
+  font-size: 0.91rem;
+  line-height: 1.55;
+}
+
+/* ==========================================
+   LEARNER — USEFUL WORDS
+   ========================================== */
+
+.learner-vocabulary {
+  margin-top: 30px;
+}
+
+.learner-word-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+
+  margin-top: 12px;
+}
+
+.learner-word {
+  display: inline-flex;
+  align-items: center;
+
+  padding: 9px 13px;
+
+  border: 1px solid #e8ebef;
+  border-radius: 11px;
+
+  background: var(--surface);
+  color: #343a45;
+
+  font-size: 0.87rem;
+  font-weight: 500;
+}
+
+/* ==========================================
+   LEARNER — NEED HELP
+   ========================================== */
+
+.learner-help {
+  margin-top: 28px;
+}
+
+.help-toggle {
+  display: inline-flex;
+
+  min-height: 42px;
+  align-items: center;
+  gap: 9px;
+
+  padding: 0;
+
+  border: 0;
+  background: transparent;
+  color: var(--blue);
+
+  font-size: 0.89rem;
+  font-weight: 600;
+
+  cursor: pointer;
+}
+
+.help-toggle:hover {
+  color: var(--blue-dark);
+}
+
+.help-content {
+  margin-top: 12px;
+  padding: 18px;
+
+  border: 1px solid #e1eafd;
+  border-radius: var(--radius-md);
+
+  background: #f5f8ff;
+
+  animation: content-appear 0.25s ease both;
+}
+
+.help-content p {
+  margin: 0;
+
+  color: var(--secondary);
+
+  font-size: 0.9rem;
+  line-height: 1.65;
+}
+
+.learner-hint-words {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+
+  margin-top: 12px;
+}
+
+.learner-hint-word {
+  display: inline-flex;
+  align-items: center;
+
+  padding: 8px 12px;
+
+  border-radius: 10px;
+
+  background: #e8f0ff;
+  color: var(--blue-dark);
+
+  font-size: 0.86rem;
+  font-weight: 600;
+}
+
+/* ==========================================
+   LEARNER — PASSIVE WAITING STATUS
+   ========================================== */
+
+.learner-action {
+  margin-top: auto;
+
+  padding:
+    18px
+    0
+    max(12px, env(safe-area-inset-bottom));
+
+  background: #ffffff;
+}
+
+.learner-primary {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+
+  min-height: 42px;
+  width: 100%;
+
+  padding: 10px;
+
+  border: 0;
+  border-radius: 12px;
+
+  background: transparent;
+  box-shadow: none;
+
+  color: var(--muted);
+
+  font-size: 0.84rem;
+  font-weight: 500;
+
+  cursor: default;
+}
+
+.learner-primary svg {
+  color: var(--blue);
+}
+
+/* ==========================================
+   SPEAKER — ROLE
+   ========================================== */
+
+.instructor-role {
+  margin-bottom: 30px;
+}
+
+.instructor-role p {
+  margin: 8px 0 0;
+
+  color: var(--ink);
+
+  font-size: 0.96rem;
+  font-weight: 600;
+}
+
+/* ==========================================
+   SPEAKER — MAIN OBJECTIVE
+   ========================================== */
+
+.instructor-current {
+  padding-top: 52px;
+  padding-bottom: 58px;
+}
+
+.instructor-current h2 {
+  font-size: clamp(1.55rem, 3.5vw, 2rem);
+}
+
+.instructor-instruction {
+  margin-top: 20px;
+  white-space: pre-line;
+}
+
+.instructor-guidance {
+  margin-top: 22px;
+}
+
+.instructor-guidance p {
+  max-width: 520px;
+  margin: 8px 0 0;
+  color: var(--secondary);
+  font-size: 0.91rem;
+  line-height: 1.65;
+}
+
+/* ==========================================
+   SPEAKER — PRIVATE INFORMATION
+   ========================================== */
+
+.instructor-information-section {
+  margin-top: 32px;
+}
+
+.instructor-private {
+  display: grid;
+  width: 100%;
+
+  gap: 0;
+
+  margin-top: 0;
+  padding: 5px 18px;
+
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+
+  background: var(--surface);
+}
+
+.instructor-private__item {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+
+  gap: 16px;
+
+  padding: 12px 0;
+
+  color: var(--secondary);
+
+  font-size: 0.91rem;
+  line-height: 1.55;
+}
+
+.instructor-private__item + .instructor-private__item {
+  border-top: 1px solid #e7e9ed;
+}
+
+.instructor-private__item span {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.instructor-private__item strong {
+  flex: 0 0 auto;
+
+  color: var(--ink);
+
+  font-size: 0.93rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+/* ==========================================
+   SPEAKER — CONTINUE CONDITION
+   ========================================== */
+
+.instructor-gate-section {
+  margin-top: 30px;
+  padding-top: 22px;
+
+  border-top: 1px solid var(--line);
+}
+
+.instructor-gate-section p {
+  margin: 0;
+
+  color: var(--secondary);
+
+  font-size: 0.95rem;
+  font-weight: 500;
+  line-height: 1.65;
+}
+
+/* ==========================================
+   SPEAKER — CONFIRM & NEXT
+   ========================================== */
+
+.instructor-action-area {
+  position: sticky;
+  bottom: 0;
+
+  margin-top: auto;
+
+  padding:
+    16px
+    0
+    max(12px, env(safe-area-inset-bottom));
+
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0),
+    #ffffff 15%
+  );
+}
+
+.instructor-primary-action {
+  display: flex;
+
+  width: 100%;
+  min-height: 58px;
+
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+
+  padding: 14px 18px;
+
+  border: 0;
+  border-radius: var(--radius-md);
+
+  background: var(--blue);
+  color: #ffffff;
+
+  box-shadow: 0 5px 15px rgba(52, 120, 246, 0.12);
+
+  font-size: 0.94rem;
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.instructor-primary-action:hover:not(:disabled) {
+  background: var(--blue-dark);
+
+  box-shadow: 0 7px 18px rgba(52, 120, 246, 0.17);
+}
+
+.instructor-primary-action:active:not(:disabled) {
+  transform: scale(0.99);
+}
+
+.instructor-primary-action:disabled {
+  opacity: 0.52;
+  cursor: not-allowed;
+}
+
+.instructor-error {
+  margin: 0 0 12px;
+}
+
+/* ==========================================
+   MISSION COMPLETION
+   ========================================== */
+
+.learner-complete,
+.instructor-complete {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+  gap: 16px;
+  padding: 16px 0;
+}
+
+.learner-complete__check {
+  display: grid;
+
+  width: 52px;
+  height: 52px;
+
+  place-items: center;
+
+  border-radius: 50%;
+  background: #e9f8ef;
+  color: #208a50;
+}
+
+.learner-complete h2,
+.instructor-complete h2 {
+  font-size: clamp(1.9rem, 7vw, 2.6rem);
+  letter-spacing: -0.05em;
+}
+
+.learner-complete .learner-task {
+  margin-top: 0;
+}
+
+/* ==========================================
+   MOBILE OPTIMIZATION
+   ========================================== */
+
+@media (max-width: 480px) {
+  .role-screen,
+  .learner-screen,
+  .instructor-screen {
+    width: calc(100% - 36px);
+  }
+
+  .role-choice {
+    padding: 34px 0;
+  }
+
+  .learner-current,
+  .instructor-current {
+    padding: 36px 2px 44px;
+  }
+
+  .learner-meta {
+    margin-bottom: 28px;
+  }
+
+  .learner-current h2,
+  .instructor-current h2 {
+    font-size: 1.65rem;
+    line-height: 1.3;
+  }
+
+  .learner-task,
+  .learner-context,
+  .instructor-instruction {
+    font-size: 0.94rem;
+  }
+
+  .learner-known,
+  .instructor-private {
+    border-radius: 15px;
+  }
+
+  .learner-vocabulary,
+  .learner-known {
+    margin-top: 25px;
+  }
+
+  .instructor-role {
+    margin-bottom: 24px;
+  }
+
+  .instructor-information-section {
+    margin-top: 28px;
+  }
+}
+
+/* ==========================================
+   VERY SMALL SCREENS
+   ========================================== */
+
+@media (max-width: 360px) {
+  .role-screen,
+  .learner-screen,
+  .instructor-screen {
+    width: calc(100% - 28px);
+  }
+
+  .simple-topbar,
+  .instructor-topbar {
+    gap: 8px;
+  }
+
+  .learner-current h2,
+  .instructor-current h2 {
+    font-size: 1.65rem;
+  }
+
+  .instructor-private__item {
+    gap: 10px;
+    font-size: 0.85rem;
+  }
+}
+
+/* ==========================================
+   REDUCED MOTION
+   ========================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ==========================================
+   ROLE-SPECIFIC MISSION BRIEFING
+   ========================================== */
+
+.briefing-screen {
+  display: flex;
+  width: min(100% - 40px, 760px);
+  min-height: 100svh;
+  flex-direction: column;
+  margin: 0 auto;
+  padding:
+    max(12px, env(safe-area-inset-top))
+    0
+    max(16px, env(safe-area-inset-bottom));
+}
+
+.briefing-topbar {
+  display: grid;
+  min-height: 62px;
+  grid-template-columns: 42px 1fr auto;
+  align-items: center;
+  gap: 12px;
+  border-bottom: 1px solid var(--line);
+}
+
+.briefing-back {
+  display: grid;
+  width: 40px;
+  height: 40px;
+  place-items: center;
+  border: 0;
+  border-radius: 50%;
+  background: var(--surface);
+  color: var(--ink);
+  cursor: pointer;
+  transition: background 0.25s ease;
+}
+
+.briefing-back:hover {
+  background: var(--surface-hover);
+}
+
+.briefing-topbar > span:nth-child(2) {
+  color: var(--secondary);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+}
+
+.briefing-connection {
+  color: var(--muted);
+  font-size: 0.75rem;
+}
+
+.briefing-content {
+  display: flex;
+  width: 100%;
+  flex: 1;
+  flex-direction: column;
+  padding: 28px 0 12px;
+  animation: content-appear 0.3s ease both;
+}
+
+.briefing-hero {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: var(--radius-lg);
+  background: #d9e3ed;
+}
+
+.briefing-hero img,
+.briefing-hero__shade {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.briefing-hero img {
+  object-fit: cover;
+}
+
+.briefing-hero__shade {
+  background: linear-gradient(0deg, rgba(10, 22, 37, 0.72), rgba(10, 22, 37, 0.02) 75%);
+}
+
+.briefing-hero__title {
+  position: absolute;
+  right: clamp(20px, 5vw, 42px);
+  bottom: clamp(20px, 5vw, 36px);
+  left: clamp(20px, 5vw, 42px);
+  color: #ffffff;
+}
+
+.briefing-hero__title span {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+}
+
+.briefing-hero__title h1 {
+  margin: 10px 0 0;
+  font-size: clamp(2rem, 7vw, 3.4rem);
+  font-weight: 700;
+  letter-spacing: -0.06em;
+  line-height: 1.08;
+}
+
+.briefing-context {
+  margin: 25px 0 22px;
+  color: var(--secondary);
+  font-size: 1rem;
+  line-height: 1.65;
+}
+
+.briefing-role {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  padding-bottom: 21px;
+  border-bottom: 1px solid var(--line);
+}
+
+.briefing-role__icon {
+  display: grid;
+  width: 42px;
+  height: 42px;
+  flex: 0 0 auto;
+  place-items: center;
+  border-radius: 14px;
+  background: var(--blue-soft);
+  color: var(--blue);
+}
+
+.briefing-label {
+  color: var(--muted);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.09em;
+}
+
+.briefing-role p,
+.briefing-goal p {
+  margin: 5px 0 0;
+  color: var(--ink);
+  font-size: 0.96rem;
+  font-weight: 600;
+  line-height: 1.55;
+}
+
+.briefing-details {
+  display: grid;
+  gap: 18px;
+  padding: 20px 0 0;
+}
+
+.briefing-goal p {
+  max-width: 600px;
+  font-weight: 500;
+}
+
+.briefing-rules {
+  display: grid;
+  gap: 9px;
+  margin: 0;
+  padding-left: 20px;
+  color: var(--secondary);
+  font-size: 0.88rem;
+  line-height: 1.55;
+}
+
+.briefing-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.briefing-meta span {
+  display: inline-flex;
+  min-height: 32px;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 11px;
+  border-radius: 999px;
+  background: var(--surface);
+  color: var(--secondary);
+  font-size: 0.78rem;
+  font-weight: 600;
+}
+
+.briefing-meta svg {
+  color: var(--blue);
+}
+
+.briefing-primary-action {
+  display: flex;
+  width: 100%;
+  min-height: 56px;
+  align-items: center;
+  justify-content: center;
+  margin-top: auto;
+  padding: 14px 18px;
+  border: 0;
+  border-radius: var(--radius-md);
+  background: var(--blue);
+  color: #ffffff;
+  box-shadow: 0 5px 15px rgba(52, 120, 246, 0.12);
+  font-size: 0.95rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition:
+    background 0.25s ease,
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    opacity 0.25s ease;
+}
+
+.briefing-primary-action:hover:not(:disabled) {
+  transform: translateY(-1px);
+  background: var(--blue-dark);
+  box-shadow: 0 7px 18px rgba(52, 120, 246, 0.17);
+}
+
+.briefing-primary-action:disabled {
+  cursor: not-allowed;
+  opacity: 0.52;
+}
+
+.briefing-waiting {
+  display: flex;
+  min-height: 56px;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  margin-top: auto;
+  color: var(--blue-dark);
+  font-size: 0.92rem;
+  font-weight: 600;
+  text-align: center;
+}
+
+.briefing-error {
+  margin: 18px 0;
+  color: #c3404b;
+  font-size: 0.85rem;
+  line-height: 1.55;
+}
+
+@media (max-width: 480px) {
+  .briefing-screen {
+    width: calc(100% - 36px);
+  }
+
+  .briefing-content {
+    padding-top: 21px;
+  }
+
+  .briefing-context {
+    margin-top: 20px;
+    font-size: 0.94rem;
+  }
+
+  .briefing-hero {
+    border-radius: 17px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .briefing-content {
+    animation: none;
+  }
+
+  .briefing-back,
+  .briefing-primary-action {
+    transition: none;
+  }
+}
+
+/* ================================================================
+   LIFEPLAY — Playful Editorial Theme
+   Inspired by the supplied three-screen visual reference.
+   Paste after the existing global.css or use the combined file.
+   CSS preserves all existing React class names and interactions.
+   Illustration placement requires corresponding JSX/image assets.
+   ================================================================ */
+:root {
+  font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --ink: #25156e;
+  --muted: #807ba4;
+  --secondary: #635d93;
+  --blue: #5d46d7;
+  --blue-dark: #4931bc;
+  --blue-soft: #f0edff;
+  --purple: #5d46d7;
+  --purple-dark: #4931bc;
+  --purple-soft: #efebff;
+  --coral: #ff776f;
+  --coral-soft: #ffebe6;
+  --pink: #f9328c;
+  --pink-soft: #ffe6f1;
+  --surface: #f6f5ff;
+  --surface-hover: #efedff;
+  --line: #eae8f7;
+  --radius-sm: 14px;
+  --radius-md: 20px;
+  --radius-lg: 26px;
+}
+html { background: #f5f7fc; }
+body { background: #f5f7fc; color: var(--ink); }
+button:focus-visible { outline-color: rgba(93,70,215,.42); }
+button:disabled { opacity: .5; }
+
+/* The desktop viewport displays the mobile experience as a polished phone-width canvas. */
+.role-screen, .learner-screen, .instructor-screen, .briefing-screen {
+  width: min(calc(100% - 28px), 440px);
+  min-height: 100svh;
+  background: #fff;
+  padding-left: 22px;
+  padding-right: 22px;
+}
+@media (min-width: 600px) {
+  .role-screen, .learner-screen, .instructor-screen, .briefing-screen {
+    min-height: min(880px, 100svh);
+    border-radius: 36px;
+    box-shadow: 0 22px 70px rgba(42,32,104,.10);
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+}
+
+/* HOME / ROLE PICKER */
+.app-wordmark {
+  font-size: 1.5rem;
+  font-weight: 800;
+  letter-spacing: -.065em;
+  font-style: italic;
+  color: #3523b3;
+  text-transform: none;
+}
+.app-wordmark svg { color: #ef3694; }
+.role-choice { margin: auto 0; padding: 34px 0 22px; }
+.role-kicker { color: var(--purple); letter-spacing: .075em; }
+.role-choice h1 {
+  max-width: 370px;
+  color: #25156e;
+  font-size: clamp(2.5rem, 9vw, 3.15rem);
+  line-height: 1.07;
+  letter-spacing: -.065em;
+  font-weight: 800;
+}
+.role-choice h1 span { color: #4d35c9; }
+.role-subtitle { margin: 18px 0 29px; color: #8580aa; line-height: 1.45; }
+.role-options { gap: 13px; }
+.role-option {
+  min-height: 106px;
+  border: 0;
+  border-radius: 24px;
+  padding: 20px 19px;
+  background: #ffede7;
+  box-shadow: none;
+  transition: transform .2s ease, box-shadow .2s ease, background .2s ease;
+}
+.role-option:nth-child(even) { background: #ffe5f1; }
+.role-option:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 7px 22px rgba(75,46,154,.1); background: #ffe1d9; }
+.role-option:nth-child(even):hover:not(:disabled) { background: #ffdaeb; }
+.role-option__icon {
+  width: 52px; height: 52px;
+  border-radius: 18px;
+  background: rgba(255,255,255,.76);
+  color: #f36d71;
+}
+.role-option__icon--instructor { color: #ed3490; background: rgba(255,255,255,.73); }
+.role-option__copy strong { font-size: 1.12rem; font-weight: 800; color: #2a177c; }
+.role-option__copy small { font-size: .82rem; color: #6e64a2; }
+.role-option > svg { color: #fff; background: var(--coral); border-radius: 50%; width: 34px; height: 34px; padding: 8px; }
+.role-option:nth-child(even) > svg { background: var(--pink); }
+
+/* COMPACT HEADER & STAGE INDICATOR */
+.simple-topbar, .instructor-topbar, .briefing-topbar {
+  min-height: 67px;
+  border-bottom: 0;
+  grid-template-columns: 40px 1fr auto;
+  gap: 10px;
+}
+.simple-topbar h1, .instructor-topbar h1 {
+  font-size: 1rem; font-weight: 800; color: #4530be; text-align: center;
+}
+.simple-step, .instructor-step { color: #4836bd; font-size: .79rem; font-weight: 800; }
+.simple-back, .instructor-back, .briefing-back {
+  width: 37px; height: 37px; background: #f3f0ff; color: #4830be;
+}
+.simple-back:hover, .instructor-back:hover, .briefing-back:hover { background: #e9e3ff; }
+/* Accurate six-stage progress bars require game-state-driven JSX. */
+
+/* GAMEPLAY: short at-a-glance objective, visually prominent soft colored panel */
+.learner-current, .instructor-current {
+  margin: 0;
+  width: 100%;
+  padding: 19px 0 30px;
+}
+.learner-meta { margin: 0 0 22px; font-size: .7rem; color: #857da9; }
+.learner-budget { color: #4830bb; background: #f0ebff; border-radius: 20px; padding: 7px 12px; }
+.learner-objective-main, .instructor-objective {
+  background: #ffeae5;
+  padding: 21px 20px 23px;
+  border-radius: 25px;
+}
+.instructor-objective { background: #ffe2ee; }
+.learner-overline, .instructor-overline {
+  display: block;
+  color: #5139bf;
+  font-size: .72rem;
+  font-weight: 800;
+  letter-spacing: .06em;
+  margin-bottom: 10px;
+}
+.learner-current h2, .instructor-current h2,
+.instructor-current .instructor-objective h2,
+.learner-current .learner-objective-main h2 {
+  margin: 0;
+  color: #26166d;
+  font-size: clamp(1.42rem, 5vw, 1.72rem);
+  line-height: 1.24;
+  letter-spacing: -.04em;
+  font-weight: 800;
+  overflow-wrap: break-word;
+}
+.learner-context, .learner-task, .instructor-instruction {
+  color: #655e90; font-size: .88rem; line-height: 1.56;
+}
+.learner-context { margin-top: 16px; }
+.learner-task { margin-top: 17px; }
+.instructor-role { margin-bottom: 15px; }
+.instructor-role p { color: #37278b; font-size: .86rem; margin-top: 4px; }
+.instructor-situation { margin-top: 13px !important; }
+.instructor-situation p { color: #665e91 !important; font-size: .82rem !important; }
+.learner-section-label, .briefing-label {
+  color: #6e679a; letter-spacing: .07em; font-size: .69rem; font-weight: 800;
+}
+
+/* INFORMATION PANELS */
+.learner-known, .instructor-private {
+  background: #fff;
+  border: 1px solid #e7e4f5;
+  box-shadow: 0 2px 0 rgba(87,71,165,.025);
+  border-radius: 21px;
+}
+.learner-known { margin-top: 14px; padding: 17px 18px; gap: 10px; }
+.learner-known p { font-size: .86rem; color: #3c327e; }
+.learner-info-list { gap: 9px; }
+.instructor-information-section { margin-top: 19px !important; }
+.instructor-private { padding: 4px 16px; }
+.instructor-private__item { padding: 11px 0; color: #615c87; font-size: .85rem; }
+.instructor-private__item + .instructor-private__item { border-color: #edebf5; }
+.instructor-private__item strong { color: #2c207c; font-size: .86rem; }
+.instructor-gate-section { margin-top: 19px !important; padding-top: 18px; border-color: #eeecf6; }
+.instructor-gate-section p { font-size: .86rem !important; color: #514b7a; }
+
+/* LEARNER'S LANGUAGE TOOLS */
+.learner-vocabulary { margin-top: 18px; }
+.learner-word-list, .learner-hint-words { gap: 7px; margin-top: 10px; }
+.learner-word, .learner-hint-word {
+  padding: 8px 12px;
+  border: 0;
+  border-radius: 999px;
+  background: #ede8ff;
+  color: #4835c2;
+  font-size: .84rem;
+  font-weight: 700;
+}
+.learner-help { margin-top: 18px; }
+.help-toggle {
+  width: 100%; min-height: 48px; justify-content: center;
+  border-radius: 15px;
+  background: #f2efff; color: #4c36c4;
+  font-size: .87rem; font-weight: 800;
+  transition: background .2s ease, transform .2s ease;
+}
+.help-toggle:hover { background: #eae5ff; color: #3924a6; }
+.help-content { margin-top: 10px; padding: 17px; border-radius: 17px; background: #f7f4ff; border-color: #ebe5ff; }
+.help-content p { color: #544d82; font-size: .86rem; }
+.learner-hint-word { background: #e9e3ff; }
+
+/* Passive waiting status: deliberately not a talk/call button. */
+.learner-action {
+  position: sticky; bottom: 0; z-index: 3;
+  background: linear-gradient(180deg,rgba(255,255,255,0),#fff 20%);
+  padding: 13px 0 max(12px,env(safe-area-inset-bottom));
+}
+.learner-primary {
+  min-height: 48px; border-radius: 16px;
+  color: #5842c8; background: #f0edff;
+  font-size: .85rem; font-weight: 700; cursor: default;
+}
+.learner-primary svg { color: #634cce; }
+
+/* PRIMARY SPEAKER ACTION */
+.instructor-action-area {
+  z-index: 4;
+  background: linear-gradient(180deg,rgba(255,255,255,0),#fff 20%);
+  padding: 16px 0 max(12px,env(safe-area-inset-bottom));
+}
+.instructor-primary-action, .briefing-primary-action {
+  border-radius: 19px;
+  background: #5e46d6;
+  color: #fff;
+  box-shadow: 0 6px 16px rgba(77,51,173,.18);
+  font-weight: 800;
+  letter-spacing: -.01em;
+  min-height: 56px;
+}
+.instructor-primary-action:hover:not(:disabled), .briefing-primary-action:hover:not(:disabled) {
+  background: #4932b9;
+  box-shadow: 0 8px 19px rgba(77,51,173,.2);
+}
+
+/* BRIEFING */
+.briefing-content { padding-top: 15px; }
+.briefing-topbar > span:nth-child(2) { color: #6456ae; }
+.briefing-connection { color: #847da7; }
+.briefing-hero {
+  aspect-ratio: 1.55 / 1;
+  background: #ffedea;
+  border-radius: 24px;
+}
+.briefing-hero img { object-fit: cover; }
+.briefing-hero__shade { background: linear-gradient(0deg,rgba(39,23,105,.55),rgba(39,23,105,0) 75%); }
+.briefing-hero__title { left: 19px; right: 19px; bottom: 19px; }
+.briefing-hero__title h1 { font-size: clamp(1.95rem,7vw,2.55rem); letter-spacing: -.055em; }
+.briefing-context { color: #635c89; font-size: .93rem; margin: 18px 0 17px; }
+.briefing-role { padding: 15px; border: 0; border-radius: 20px; background: #f4f1ff; }
+.briefing-role__icon { background: #e4dcff; color: #583bc9; border-radius: 14px; }
+.briefing-role p, .briefing-goal p { color: #2b207a; }
+.briefing-details { gap: 15px; padding-top: 18px; }
+.briefing-goal { border-radius: 20px; background: #ffece7; padding: 17px 18px; }
+.briefing-rules { color: #655e90; font-size: .84rem; }
+.briefing-meta span { background: #f1eeff; color: #513cbb; }
+.briefing-meta svg { color: #6a4dd8; }
+.briefing-waiting { color: #513abe; background: #f2efff; min-height: 54px; border-radius: 18px; margin-top: 18px; }
+.briefing-primary-action { margin-top: 20px; }
+
+/* COMPLETION */
+.learner-complete__check { background: #e8f7ef; color: #288960; }
+.learner-complete, .instructor-complete { gap: 12px; }
+.learner-complete h2, .instructor-complete h2 { font-size: 1.8rem; }
+
+/* SMALL SCREENS */
+@media (max-width: 480px) {
+  .role-screen, .learner-screen, .instructor-screen, .briefing-screen {
+    width: 100%;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+  .learner-current, .instructor-current { padding: 15px 0 24px; }
+  .learner-meta { margin-bottom: 18px; }
+  .learner-current h2, .instructor-current h2 { font-size: 1.5rem; }
+  .role-choice h1 { font-size: clamp(2.35rem,10vw,3rem); }
+  .role-option { min-height: 97px; }
+  .briefing-hero { border-radius: 21px; }
+}
+@media (max-width: 360px) {
+  .role-screen, .learner-screen, .instructor-screen, .briefing-screen {
+    padding-left: 15px; padding-right: 15px;
+  }
+  .learner-objective-main, .instructor-objective { padding: 17px 16px; }
+  .learner-current h2, .instructor-current h2 { font-size: 1.38rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}
